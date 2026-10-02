@@ -1,0 +1,855 @@
+/* UI refinements only. Scene geometry and bottle styles remain in styles.css. */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --control-radius: 18px;
+  --control-ink: #101010;
+  --control-border: #171b1e66;
+}
+.ui-icon {
+  display: block;
+  flex-shrink: 0;
+}
+.solid-button,
+.line-button,
+.action-primary,
+.nav-contact {
+  min-height: 52px;
+  border-radius: var(--control-radius);
+  padding: 14px 22px;
+  gap: 24px;
+  font-size: 11px;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+.solid-button,
+.solid-button:hover,
+.action-primary,
+.nav-contact {
+  background: var(--control-ink);
+  border: 1px solid var(--control-ink);
+  color: #fff;
+}
+.line-button {
+  border: 1px solid var(--control-border);
+  background: transparent;
+}
+.line-button:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+  gap: 24px;
+  background: #171b1e06;
+}
+.text-button {
+  min-height: 48px;
+  font-size: 11px;
+}
+.text-button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 7px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+.text-button:hover::after {
+  transform: scaleX(1);
+}
+.solid-button span,
+.line-button span,
+.text-button > span {
+  transition: transform 180ms ease;
+}
+.solid-button:hover span,
+.line-button:hover span,
+.text-button:hover > span {
+  transform: translate(2px, -2px);
+}
+.solid-button:active,
+.line-button:active,
+.text-button:active,
+.action-primary:active {
+  transform: scale(0.97);
+}
+.action-primary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 64px;
+  padding: 10px 12px 10px 24px;
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  overflow: hidden;
+}
+.action-arrow {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffffff14;
+  border: 1px solid #ffffff26;
+}
+.action-arrow svg {
+  transition: transform 180ms ease;
+}
+.action-primary:hover .action-arrow svg {
+  transform: translate(2px, -2px);
+}
+.action-primary:hover {
+  background: #000;
+  box-shadow: 0 8px 20px #171b1e18;
+}
+.action-primary:focus-visible {
+  outline-color: var(--ink);
+}
+.close-button {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  background: #ffffff0d;
+  transition:
+    background 180ms,
+    transform 180ms;
+}
+.close-button:hover {
+  background: #ffffff26;
+}
+.close-button:active {
+  transform: scale(0.97);
+}
+.location-actions {
+  align-items: center;
+  gap: var(--space-3);
+}
+.location-actions .solid-button,
+.location-actions .line-button {
+  border-radius: 999px;
+  min-height: 56px;
+  margin: 0;
+}
+.location-mark {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border: 1px solid #171b1e26;
+  border-radius: 16px 16px 24px 16px;
+  background: #ffffff4d;
+  color: #bb3f0e;
+}
+.location-address address {
+  font-size: 14px;
+  color: #42564a;
+  line-height: 1.85;
+}
+.location-address h3 {
+  font-size: 20px;
+}
+.location-address {
+  max-width: 420px;
+  gap: 16px;
+}
+.map-pin {
+  border: 1px solid #171b1e26;
+  padding: 16px 20px;
+  border-radius: 24px 24px 40px 24px;
+  background: #fafcfd80;
+  backdrop-filter: blur(10px);
+  min-height: 56px;
+}
+.contact-links {
+  display: grid;
+  gap: 12px;
+}
+.contact-links a,
+.contact-links button {
+  padding: 18px 20px;
+  border: 1px solid #ffffff40;
+  border-radius: 18px;
+  min-height: 56px;
+  font-size: 11px;
+}
+.contact-links a:hover,
+.contact-links button:hover {
+  background: #ffffff08;
+  color: white;
+}
+footer {
+  border-radius: 40px 40px 0 0;
+}
+.back-top {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+}
+.footer-grid nav a {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+.footer-bottom button {
+  min-height: 44px;
+}
+
+/* Orange stays the existing brand color; light is confined to this dialog. */
+.enquiry-dialog {
+  background-color: var(--orange);
+  background-image:
+    radial-gradient(ellipse at 8% 15%, #ffffff12, transparent 55%),
+    radial-gradient(ellipse at 95% 90%, #ffffff0d, transparent 55%);
+  color: var(--ink);
+  overscroll-behavior: contain;
+  scroll-padding-block: 24px;
+  padding-bottom: max(40px, env(safe-area-inset-bottom));
+}
+.enquiry-dialog .dialog-top {
+  max-width: 1440px;
+  margin-inline: auto;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--orange);
+  backdrop-filter: blur(12px);
+}
+.enquiry-dialog .dialog-top::before {
+  content: '';
+  position: absolute;
+  inset: -40px 0 0;
+  z-index: -1;
+  background: var(--orange);
+}
+.enquiry-dialog .wordmark {
+  color: var(--ink);
+}
+.enquiry-dialog .close-button {
+  border-color: #171b1e66;
+  color: var(--ink);
+}
+.enquiry-content {
+  max-width: 1200px;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(32px, 6vw, 88px);
+  margin-block: 64px 32px;
+}
+.enquiry-intro {
+  align-self: start;
+  position: sticky;
+  top: 24px;
+  min-width: 0;
+}
+.enquiry-content h2 {
+  color: var(--ink);
+  font-size: clamp(64px, 7.8vw, 112px);
+  line-height: 0.88;
+  letter-spacing: -0.075em;
+}
+.enquiry-more {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  margin-bottom: 20px;
+}
+.enquiry-content .outline-white {
+  -webkit-text-stroke: 1px var(--ink);
+  color: transparent;
+}
+.enquiry-content .eyebrow {
+  color: #311c0c;
+  font-size: 10px;
+  margin-bottom: 32px;
+}
+.enquiry-content .tiny-dot {
+  background: #311c0c;
+}
+.enquiry-content .enquiry-intro > p {
+  font-size: 16px;
+  max-width: 290px;
+  line-height: 1.6;
+  margin-top: 28px;
+}
+.form-footnote {
+  font-size: 9px;
+  line-height: 1.7;
+  margin-top: 32px;
+  max-width: 260px;
+}
+.enquiry-body,
+.enquiry-form,
+.form-field {
+  min-width: 0;
+}
+.enquiry-form[hidden] {
+  display: none;
+}
+.form-section-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #171b1e40;
+  padding-top: 16px;
+  margin-bottom: 24px;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+}
+.enquiry-form .form-grid {
+  gap: 20px 16px;
+  margin-bottom: 32px;
+}
+.enquiry-form label {
+  display: block;
+  margin: 0 0 10px;
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.enquiry-form label > span {
+  opacity: 1;
+}
+.field-control {
+  position: relative;
+}
+.enquiry-form input,
+.enquiry-form select,
+.enquiry-form textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: 58px;
+  padding: 16px;
+  background: #ffffff0f;
+  border: 1px solid var(--control-border);
+  border-radius: 16px;
+  color: var(--ink);
+  box-shadow: inset 0 1px 0 #ffffff14;
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+  transition:
+    border-color 200ms,
+    box-shadow 200ms,
+    transform 200ms,
+    background 200ms;
+  scroll-margin-top: 96px;
+  scroll-margin-bottom: 28px;
+}
+.enquiry-form input::placeholder,
+.enquiry-form textarea::placeholder {
+  color: #49230f;
+  opacity: 0.85;
+}
+.enquiry-dialog :is(input, select, textarea):focus-visible,
+.enquiry-dialog :is(input, select, textarea):focus {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-color: var(--ink);
+  background: #ffffff18;
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 #ffffff24,
+    0 4px 12px #171b1e0d;
+}
+.form-field:focus-within label {
+  color: #000;
+}
+.field-icon {
+  position: absolute;
+  left: 16px;
+  top: 19px;
+  pointer-events: none;
+}
+.enquiry-form .with-icon input {
+  padding-left: 44px;
+}
+.select-control {
+  position: relative;
+}
+.enquiry-form select {
+  appearance: none;
+  padding-right: 44px;
+  cursor: pointer;
+}
+.select-control > .ui-icon {
+  position: absolute;
+  top: 19px;
+  right: 16px;
+  pointer-events: none;
+}
+.enquiry-form option {
+  background: #fff5eb;
+  color: var(--ink);
+}
+.enquiry-form input[type='date'] {
+  color-scheme: light;
+  position: relative;
+  padding-right: 12px;
+}
+.enquiry-form input[type='date']::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 4px;
+}
+.enquiry-form input[type='date']::-webkit-date-and-time-value {
+  text-align: left;
+  min-height: 24px;
+}
+.enquiry-form textarea {
+  min-height: 148px;
+  resize: vertical;
+  max-height: 480px;
+}
+.enquiry-form input:autofill {
+  background: #fff0d6;
+  color: var(--ink);
+}
+.enquiry-form input:-webkit-autofill {
+  -webkit-text-fill-color: var(--ink);
+  -webkit-box-shadow: 0 0 0 1000px #ffd1b5 inset;
+  caret-color: var(--ink);
+}
+.field-hint,
+.field-error {
+  margin-top: 8px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.field-hint {
+  color: #49230f;
+}
+.field-error {
+  color: #491609;
+  font-weight: 600;
+}
+.has-error input {
+  border-color: #6c1f11;
+  border-width: 2px;
+}
+.form-notice {
+  font-size: 11px;
+  color: #311c0c;
+  line-height: 1.65;
+  max-width: 390px;
+  margin: 24px 0 16px;
+}
+.submit-feedback {
+  font-size: 12px;
+  margin-top: 12px;
+}
+.request-result {
+  padding: 0;
+}
+.request-result .result-symbol {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border: 1px solid #171b1e66;
+  border-radius: 24px 24px 40px 24px;
+  margin-bottom: 32px;
+}
+.result-symbol .ui-icon {
+  width: 32px;
+  height: 32px;
+}
+.request-result h3 {
+  margin: 16px 0 24px;
+}
+.request-result p {
+  font-size: 16px;
+  max-width: 390px;
+}
+.request-result .action-primary {
+  margin-top: 32px;
+}
+.request-result .text-button {
+  display: inline-flex;
+  color: var(--ink);
+}
+.request-result h3:focus {
+  outline: none;
+}
+.enquiry-dialog button:focus-visible,
+.enquiry-dialog a:focus-visible,
+.mobile-menu button:focus-visible,
+.mobile-menu a:focus-visible {
+  outline-color: var(--ink);
+}
+
+@supports (appearance: base-select) {
+  .enquiry-form select,
+  .enquiry-form select::picker(select) {
+    appearance: base-select;
+  }
+  .enquiry-form select::picker-icon {
+    display: none;
+  }
+  .enquiry-form select::picker(select) {
+    border-radius: 16px;
+    border: 1px solid var(--control-border);
+    padding: 8px;
+    box-shadow: 0 10px 32px #171b1e20;
+    background: #fff5eb;
+  }
+  .enquiry-form option {
+    padding: 14px 12px;
+    border-radius: 10px;
+    min-height: 48px;
+    font-size: 16px;
+  }
+  .enquiry-form option:checked,
+  .enquiry-form option:hover {
+    background: #f45b1820;
+  }
+}
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .solid-button:hover,
+  .line-button:hover,
+  .action-primary:hover {
+    transform: translateY(-2px);
+  }
+}
+@media (max-width: 1100px) {
+  .enquiry-content {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+  }
+  .enquiry-intro {
+    position: static;
+  }
+  .enquiry-content h2 {
+    font-size: clamp(72px, 11vw, 100px);
+  }
+}
+@media (max-width: 767px) {
+  .body-copy,
+  .story .body-copy,
+  .macro .body-copy,
+  .bulk .body-copy,
+  .product-info .body-copy,
+  .process .body-copy {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .hero-copy p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .story .body-copy {
+    max-width: 185px;
+  }
+  .story .line-button {
+    min-width: 0;
+    width: 180px;
+    gap: 12px;
+  }
+  .macro .body-copy {
+    max-width: 240px;
+  }
+  .bulk .body-copy {
+    max-width: 290px;
+  }
+  .product-info .availability {
+    font-size: 10px;
+  }
+  .process-list li > span:nth-child(2) {
+    font-size: 13px;
+  }
+  .process-note {
+    font-size: 11px;
+    line-height: 1.7;
+  }
+  .reviews p {
+    font-size: 14px;
+  }
+  .finale-copy p {
+    font-size: 14px;
+  }
+  .menu-toggle {
+    width: 48px;
+    height: 48px;
+    padding: 11px;
+    border: 1px solid #171b1e33;
+    border-radius: 14px;
+    background: #ffffff40;
+  }
+  .menu-toggle span {
+    width: 24px;
+  }
+  .menu-toggle span:last-child {
+    width: 17px;
+  }
+  .mobile-menu {
+    color: var(--ink);
+    padding: 24px 18px max(32px, env(safe-area-inset-bottom));
+  }
+  .mobile-menu .close-button {
+    border-color: #171b1e66;
+  }
+  .mobile-menu nav {
+    margin-top: 40px;
+  }
+  .mobile-menu nav a {
+    min-height: 52px;
+    font-size: clamp(32px, 10vw, 44px);
+    line-height: 1.4;
+  }
+  .menu-bottom {
+    margin-top: 32px;
+    line-height: 1.7;
+  }
+  .solid-button,
+  .line-button,
+  .story .line-button,
+  .product-info .line-button,
+  .bulk .solid-button,
+  .reviews .line-button {
+    font-size: 10px;
+    min-height: 52px;
+    padding: 14px 18px;
+    gap: 16px;
+  }
+  .hero-actions .text-button {
+    font-size: 9px;
+  }
+  .location-actions .solid-button {
+    min-width: 0;
+  }
+  .location-actions .line-button {
+    min-width: 0;
+  }
+  .location h2 {
+    font-size: clamp(48px, 16vw, 68px);
+  }
+  .location-actions {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 190px;
+    gap: 12px;
+  }
+  .location-address {
+    max-width: 190px;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 12px 8px;
+    align-items: center;
+  }
+  .location-mark {
+    width: 32px;
+    height: 36px;
+    border-radius: 12px 12px 18px 12px;
+  }
+  .location-address > div {
+    display: contents;
+  }
+  .location-address address {
+    font-size: 14px;
+    grid-column: 1 / -1;
+  }
+  .location-address h3 {
+    font-size: 18px;
+  }
+  .location-address h3 {
+    margin: 0;
+  }
+  .contact-links {
+    max-width: 190px;
+    gap: 12px;
+  }
+  .contact-links a,
+  .contact-links button {
+    min-height: 56px;
+    padding: 16px 12px;
+    font-size: 9px;
+    letter-spacing: 0.04em;
+    gap: 8px;
+  }
+  .contact-meta {
+    font-size: 9px;
+  }
+  .product-controls button {
+    min-height: 52px;
+  }
+  footer {
+    border-radius: 32px 32px 0 0;
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
+  }
+  .footer-grid nav {
+    font-size: 12px;
+    gap: 0;
+  }
+  .footer-grid address {
+    font-size: 11px;
+  }
+  .footer-bottom,
+  .footer-bottom button {
+    font-size: 10px;
+  }
+  .back-top {
+    font-size: 10px;
+  }
+  .mobile-dock {
+    display: flex;
+    position: fixed;
+    bottom: max(12px, env(safe-area-inset-bottom));
+    left: 12px;
+    right: 12px;
+    height: 64px;
+    padding: 6px;
+    gap: 0;
+    background: #fafcf2eb;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid #171b1e26;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px #171b1e14;
+  }
+  .mobile-dock a,
+  .mobile-dock button {
+    flex: 1;
+    min-width: 0;
+    min-height: 48px;
+    border-radius: 0;
+    gap: 4px;
+    color: var(--ink);
+    background: none;
+    transition:
+      background 150ms,
+      transform 150ms;
+  }
+  .mobile-dock a + a,
+  .mobile-dock button {
+    border-left: 1px solid #171b1e14;
+  }
+  .mobile-dock .ui-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .mobile-dock span {
+    font-size: 9px;
+    line-height: 1.2;
+    letter-spacing: 0.025em;
+    font-weight: 600;
+  }
+  .mobile-dock button {
+    color: #a73508;
+  }
+  .mobile-dock :is(a, button):active {
+    transform: scale(0.97);
+    background: #f45b1814;
+  }
+  .enquiry-dialog {
+    padding: 24px 18px max(32px, env(safe-area-inset-bottom));
+  }
+  .enquiry-content {
+    margin-top: 40px;
+    gap: 28px;
+    margin-bottom: 0;
+  }
+  .enquiry-content .eyebrow {
+    font-size: 9px;
+    margin-bottom: 24px;
+  }
+  .enquiry-content h2 {
+    font-size: clamp(64px, 19vw, 94px);
+    line-height: 0.88;
+  }
+  .enquiry-more {
+    margin-bottom: 16px;
+    font-size: 10px;
+  }
+  .enquiry-content .enquiry-intro > p {
+    margin-top: 24px;
+    font-size: 16px;
+    max-width: 280px;
+  }
+  .form-footnote {
+    margin-top: 20px;
+    font-size: 8px;
+    max-width: none;
+  }
+  .enquiry-form label {
+    font-size: 10px;
+    margin-bottom: 10px;
+  }
+  .form-section-label {
+    margin-bottom: 24px;
+    font-size: 9px;
+  }
+  .enquiry-form input,
+  .enquiry-form select,
+  .enquiry-form textarea {
+    font-size: 16px;
+  }
+  .request-result h3 {
+    font-size: 40px;
+  }
+}
+@media (max-width: 599px) {
+  .enquiry-form .form-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .enquiry-form textarea {
+    min-height: 148px;
+  }
+}
+@media (max-width: 360px) {
+  .enquiry-dialog,
+  .mobile-menu {
+    padding-inline: 16px;
+  }
+  .enquiry-content h2 {
+    font-size: clamp(58px, 18vw, 65px);
+  }
+  .hero-actions {
+    gap: 12px;
+  }
+  .hero-actions .solid-button {
+    min-width: 140px;
+    padding: 14px;
+  }
+  .hero-actions .text-button {
+    font-size: 8px;
+    gap: 6px;
+  }
+  .contact-links {
+    max-width: 70%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .solid-button:hover span,
+  .line-button:hover span,
+  .text-button:hover > span,
+  .action-primary:hover .action-arrow svg {
+    transform: none;
+  }
+  .enquiry-dialog :is(input, select, textarea):focus {
+    transform: none;
+  }
+}

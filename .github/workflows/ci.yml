@@ -1,0 +1,57 @@
+name: Production checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Verify the bottle is unchanged
+        run: npm run check:bottle
+      - name: Build production assets
+        run: npm run build
+      - name: Install browser engines
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Test responsive layouts, accessibility, and request downloads
+        run: npm run test:e2e
+      - name: Verify the compiled production experience
+        run: npm run test:production
+      - name: Save production build
+        if: success()
+        uses: actions/upload-artifact@v7
+        with:
+          name: arwa-production
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Save browser screenshots and failure details
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: browser-checks
+          path: |
+            artifacts/*.png
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
