@@ -5,7 +5,8 @@ for (const [name, engine] of [
   ['WebKit', webkit],
 ] as const) {
   test(`${name}: mobile navigation, products, keyboard dialogs, and fallback`, async () => {
-    const browser = await engine.launch()
+    // Keep the Chromium-only software-rendering flag out of other engines.
+    const browser = await engine.launch({ args: [] })
     const context = await browser.newContext({
       viewport: { width: 390, height: 844 },
       reducedMotion: 'reduce',
